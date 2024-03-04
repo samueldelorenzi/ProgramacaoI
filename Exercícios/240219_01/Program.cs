@@ -26,6 +26,20 @@ string ? nome = string.Empty;
 Console.WriteLine("Qual seu nome?");
 nome = Console.ReadLine();
 string resultado = $"Oi, {nome}! Pare de jaguarice!";
-Console.BackgroundColor = ConsoleColor.Blue;
 Console.WriteLine(resultado);
 Console.ResetColor();
+
+//aula 03 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//substituindo conteudo de strings
+string nomeCompleto = "Samuel De Lorenzi Ribeiro";
+nomeCompleto = nomeCompleto.Replace("Lorenzi", "Dalua");
+Console.WriteLine(nomeCompleto);
+
+//comparação de strings
+bool isNomeEqual = (nomeCompleto == "Samuel De Lorenzi Ribeiro");
+
+bool isNomeEqual2 = string.Equals(nomeCompleto, "Samuel De Dalua Ribeiro");
+
+Console.WriteLine($"Primeiro valor: {isNomeEqual}");
+Console.WriteLine($"Segundo valor: {isNomeEqual2}");
