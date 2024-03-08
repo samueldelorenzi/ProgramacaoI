@@ -1,14 +1,16 @@
 ﻿bool rodar = true;
 string ? denovo = "";
-float operando1 = 0;
-float operando2 = 0;
-float result = 0;
-string operador = "+";
-bool isValid1 = false;
-bool isValid2 = false;
-bool isValid3 = false;
+
 while(rodar)
 {
+    float operando1 = 0;
+    float operando2 = 0;
+    float result = 0;
+    string operador = "+";
+    bool isValid1 = false;
+    bool isValid2 = false;
+    bool isValid3 = false;
+    
     Console.WriteLine("Bem-vindo a calculadora simples, 4 operações para dois operandos.");
 
     while (! isValid1)
@@ -54,9 +56,22 @@ while(rodar)
         break;
     }
     Console.WriteLine($"Resultado: {result}");
-    Console.WriteLine("Rodar novamente?");
+    Console.WriteLine("Rodar novamente? S/N");
     denovo = Console.ReadLine();
-    rodar = false;
+    switch(denovo) 
+    {
+        case "s" or "S":
+            rodar = true;
+        break;
+        case "n" or "N":
+            rodar = false;
+        break;
+
+        default: 
+            rodar = false;
+        break;
+    }
+    
 }
 
 
