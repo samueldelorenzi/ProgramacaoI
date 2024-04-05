@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ClassesImobiliaria.Models
 {
-    public class Negocio
+    public class Negocio(int id, string negocio)
     {
-        public int Id { get; set; }
-        public string? negocio {get; set; }
+        public int Id { get; set; } = id;
+        public string? Tipo_negocio { get; set; } = negocio;
     }
 }

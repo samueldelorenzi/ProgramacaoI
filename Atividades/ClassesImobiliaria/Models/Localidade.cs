@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ClassesImobiliaria.Models
 {
-    public class Localidade
+    public class Localidade(int id, string localidade)
     {
-        public int Id { get; set; }
-        public string? localidade { get; set; }
+        public int Id { get; set; } = id;
+        public string? Tipo_localidade { get; set; } = localidade;
     }
 }

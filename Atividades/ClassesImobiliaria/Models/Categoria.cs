@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ClassesImobiliaria.Models
 {
-    public class Categoria
+    public class Categoria(int id, string categoria)
     {
-        public int Id { get; set; }
-        public string? categoria { get; set; }
+        public int Id { get; set; } = id;
+        public string? Tipo_categoria { get; set; } = categoria;
     }
 }
