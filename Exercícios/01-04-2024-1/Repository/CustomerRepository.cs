@@ -2,27 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using _01_04_2024_1.Data;
-using _01_04_2024_1.Models;
+using _240401_01.Models;
+using _240401_01.Data;
 
-namespace _01_04_2024_1.Repository
+namespace _240401_01.Repository
 {
     public class CustomerRepository
-    {
-
+    {                
         public void Save(Customer customer)
         {
-            DataSet.Customers?.Add(customer);
+            DataSet.Customers.Add(customer);
         }
+
         public Customer Retrieve(int id)
-        {
-            foreach (var c in DataSet.Customers)
+        {            
+            foreach(var c in DataSet.Customers)
             {
-                if (c.CustomerId == id)
-                {
-                    return c;
-                }
+                if( c.CustomerId == id )                
+                    return c;                
             }
+
             return null;
         }
     }

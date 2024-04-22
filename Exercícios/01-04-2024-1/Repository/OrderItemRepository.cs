@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace _240401_01.Repository
 {
-    public class AddressRepository
+    public class OrderItemRepository
     {
         
     }
