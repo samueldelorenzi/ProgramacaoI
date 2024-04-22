@@ -14,13 +14,5 @@ namespace _01_04_2024_1.Models
         {
             return true;
         }
-        public Product Retrieve()
-        {
-            return new Product();
-        }
-        public void Save(Product product)
-        {
-            
-        }
     }
 }

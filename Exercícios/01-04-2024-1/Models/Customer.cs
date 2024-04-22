@@ -11,8 +11,7 @@ namespace _01_04_2024_1.Models
         public int CustomerId { get; set; }
         public string? Name { get; set; }
         public string? EmailAdress { get; set; }
-        public string? HomeAdress { get; set; }
-        public string? WorkAdress { get; set; }
+        public List<Address>? Adresses { get; set; }
 
         public Customer(int id)
         {
@@ -24,15 +23,6 @@ namespace _01_04_2024_1.Models
             if (string.IsNullOrWhiteSpace(Name)) isValid = false;
             if (string.IsNullOrWhiteSpace(EmailAdress)) isValid = false;
             return isValid;
-        }
-
-        public List<Customer> Retrieve()
-        {
-            return new List<Customer>();
-        }
-        public void Save(Customer customer)
-        {
-            
         }
     }
 }
