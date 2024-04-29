@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using _240401_01.Models;
-using _240401_01.Data;
+using _01_04_2024_1.Models;
+using _01_04_2024_1.Data;
 
-namespace _240401_01.Repository
+namespace _01_04_2024_1.Repository
 {
     public class CustomerRepository
     {                
@@ -23,6 +23,11 @@ namespace _240401_01.Repository
             }
 
             return null;
+        }
+
+        public List<Customer> Retrieve()
+        {
+            return DataSet.Customers;
         }
     }
 }
