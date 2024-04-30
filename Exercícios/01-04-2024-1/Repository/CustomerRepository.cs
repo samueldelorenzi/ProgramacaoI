@@ -11,6 +11,7 @@ namespace _01_04_2024_1.Repository
     {                
         public void Save(Customer customer)
         {
+            customer.CustomerId = this.GetNextId();
             DataSet.Customers.Add(customer);
         }
 
@@ -28,6 +29,15 @@ namespace _01_04_2024_1.Repository
         public List<Customer> Retrieve()
         {
             return DataSet.Customers;
+        }
+        private int GetNextId()
+        {
+            int n = 0;
+            foreach (var c in DataSet.Customers)
+            {
+                if (c.CustomerId > n) n = c.CustomerId;
+            }
+            return n++;
         }
     }
 }
