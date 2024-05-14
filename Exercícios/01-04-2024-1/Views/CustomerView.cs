@@ -39,10 +39,13 @@ namespace _01_04_2024_1.Views
                             Console.WriteLine("");
                         break;
                         case 1:
+                            insertCustomer();
                         break;
                         case 2:
+                            SearchCustomer();
                         break;
                         case 3:
+                            ListCustomers();
                         break;
                         default:
                             Console.WriteLine("");
@@ -71,11 +74,11 @@ namespace _01_04_2024_1.Views
             Console.WriteLine("INSERIR NOVO CONSUMIDOR");
             Console.WriteLine("-----------------------");
             Customer customer = new Customer();
-            Console.Write("Nome:");
+            Console.Write("Nome: ");
             customer.Name = Console.ReadLine();
             Console.WriteLine("");
 
-            Console.Write("Nome:");
+            Console.Write("Email: ");
             customer.EmailAddress = Console.ReadLine();
             Console.WriteLine("");
 
@@ -107,6 +110,100 @@ namespace _01_04_2024_1.Views
                     Console.WriteLine("Opção inválida, tente novamente.");
                 }
             }while(aux != 0);
+
+            try
+            {
+                customerController.Insert(customer);
+                Console.WriteLine("Inserido com sucesso");
+            }
+            catch
+            {
+                Console.WriteLine("Erro ao inserir!");
+            }
+        }
+
+        private void SearchCustomer()
+        {
+            int aux = -1;
+            do
+            {
+                Console.WriteLine("Pesquisar cliente");
+                Console.WriteLine("-----------------");
+                Console.WriteLine("1 - Busca por id");
+                Console.WriteLine("2 - Busca por nome");
+                Console.WriteLine("0 - Sair");
+
+                aux = Convert.ToInt16(Console.ReadLine());
+
+                switch(aux)
+                {
+                    case 1:
+                        Console.WriteLine("Informe o id:");
+                        int id = Convert.ToInt32(Console.ReadLine());
+                        ShowCustomerById(id);
+                    break;
+                    case 2:
+                        Console.WriteLine("Informe o nome:");
+                        string nome = Console.ReadLine();
+                        ShowCustomerByName(nome);
+                    break;
+                    case 0:
+                    break;
+                    default:
+                        aux = -1;
+                        Console.WriteLine("Opção inválida!");
+                    break;
+                }
+            } while (aux != 0);
+        }
+
+        private void ShowCustomerById(int id)
+        {
+            Customer c = customerController.GetCustomerById(id);
+            if(c != null)
+            {
+                Console.WriteLine(c.ToString());
+            }
+            else
+            {
+                Console.WriteLine($"O consumidor de id {id} não foi encontrado");
+            }
+        }
+        private void ShowCustomerByName(string nome)
+        {
+            List<Customer> result = customerController.GetByName(nome);
+            if(result == null)
+            {
+                Console.WriteLine("Não encontrado");
+                return;
+            }
+            if(result.Count == 0)
+            {
+                Console.WriteLine("Não encontrado");
+                return;
+            }
+            foreach(Customer customer in result)
+            {
+                Console.WriteLine(customer.ToString());
+            }
+        }
+        private void ListCustomers()
+        {
+            List<Customer> result = customerController.Get();
+            if(result == null)
+            {
+                Console.WriteLine("Não encontrado");
+                return;
+            }
+            if(result.Count == 0)
+            {
+                Console.WriteLine("Não encontrado");
+                return;
+            }
+            foreach(Customer customer in result)
+            {
+                Console.WriteLine(customer.ToString());
+            }
         }
     }
 }
