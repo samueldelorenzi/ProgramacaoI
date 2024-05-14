@@ -18,13 +18,17 @@ namespace _01_04_2024_1.Controllers
         {
             customerRepository.Save(customer);
         }
-        public Customer Get(int id)
+        public Customer GetCustomerById(int id)
         {
             return customerRepository.Retrieve(id);
         }
         public List<Customer> Get()
         {
             return customerRepository.Retrieve();
+        }
+        public List<Customer> GetByName(string nome)
+        {
+            return customerRepository.RetrieveByName(nome);
         }
     }
 }

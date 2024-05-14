@@ -2,28 +2,6 @@
 using _01_04_2024_1.Views;
 using System.Threading;
 
-/*// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-
-Customer c1 = new Customer();
-c1.CustomerId = 1;
-c1.Name = "Marcos";
-c1.EmailAddress = "marcos@mion.net";
-
-// Construtor de Instanciação
-Customer c2 = new Customer(2);
-c1.Name = "Michel";
-c1.EmailAddress = "michel@telo.net";
-
-// Construtor por atribuição
-Customer c3 = new Customer{
-    CustomerId = 3,
-    Name = "Shrek",
-    EmailAddress = "shrek@fiona.com"
-};*/
-
-
-
 bool aux = true;
 do{
     Console.WriteLine("MENU GERAL");

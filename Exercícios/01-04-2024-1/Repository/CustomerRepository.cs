@@ -30,6 +30,18 @@ namespace _01_04_2024_1.Repository
         {
             return DataSet.Customers;
         }
+        public List<Customer> RetrieveByName(string nome)
+        {
+            List<Customer> retorno = new List<Customer>();
+            foreach( var c in DataSet.Customers)
+            {
+                if(c.Name.Contains(nome))
+                {
+                    retorno.Add(c);
+                }
+            }
+            return retorno;
+        }
         private int GetNextId()
         {
             int n = 0;
@@ -37,7 +49,7 @@ namespace _01_04_2024_1.Repository
             {
                 if (c.CustomerId > n) n = c.CustomerId;
             }
-            return n++;
+            return ++n;
         }
     }
 }
