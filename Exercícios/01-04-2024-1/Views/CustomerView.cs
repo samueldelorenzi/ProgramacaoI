@@ -26,6 +26,7 @@ namespace _01_04_2024_1.Views
                 Console.WriteLine("1 - Inserir cliente");
                 Console.WriteLine("2 - Consultar cliente");
                 Console.WriteLine("3 - Listar clientes");
+                Console.WriteLine("4 - Exportar para delimitado");
                 Console.WriteLine("0 - Retornar");
 
                 int menu = 0;
@@ -46,6 +47,9 @@ namespace _01_04_2024_1.Views
                         break;
                         case 3:
                             ListCustomers();
+                        break;
+                        case 4:
+                            customerController.ExportToDelimited();
                         break;
                         default:
                             Console.WriteLine("");
