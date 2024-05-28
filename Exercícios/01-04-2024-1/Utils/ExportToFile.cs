@@ -13,15 +13,22 @@ namespace _01_04_2024_1.Utils
         {
             string filePath = @$"{dir}\{fileName}";
 
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-
-            using(StreamWriter sw = File.CreateText(filePath))
+            try
             {
-                sw.Write(fileContent);
-            }
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
 
-            return true;
+                using(StreamWriter sw = File.CreateText(filePath))
+                {
+                    sw.Write(fileContent);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
