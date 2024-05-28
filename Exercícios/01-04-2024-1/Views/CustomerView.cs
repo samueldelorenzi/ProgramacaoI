@@ -49,7 +49,14 @@ namespace _01_04_2024_1.Views
                             ListCustomers();
                         break;
                         case 4:
-                            customerController.ExportToDelimited();
+                            if(customerController.ExportToDelimited())
+                            {
+                                Console.WriteLine("Sucesso ao gerar arquivo");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Erro ao gerar arquivo");
+                            }
                         break;
                         default:
                             Console.WriteLine("");

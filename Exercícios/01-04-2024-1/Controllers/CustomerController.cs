@@ -31,7 +31,7 @@ namespace _01_04_2024_1.Controllers
         {
             return customerRepository.RetrieveByName(nome);
         }
-        public void ExportToDelimited()
+        public bool ExportToDelimited()
         {
             List<Customer> list = customerRepository.Retrieve();
 
@@ -42,7 +42,7 @@ namespace _01_04_2024_1.Controllers
             }
 
             string fileName = $"Customer_{DateTimeOffset.Now.ToUnixTimeSeconds()}.txt";
-            ExportToFile.SaveToDelimitedTxt(fileName, fileContent);
+            return ExportToFile.SaveToDelimitedTxt(fileName, fileContent);
 
         }
     }
