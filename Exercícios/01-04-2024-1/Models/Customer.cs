@@ -11,6 +11,10 @@ namespace _01_04_2024_1.Models
         {
             return $"{CustomerId};{Name};{EmailAddress}";
         }
+        public string PrintToExportComposed()
+        {
+            return "{0,-10} {1,-40} {2,40}", CustomerId, Name, EmailAddress;
+        }
         public override string ToString()
         {
             return $"{CustomerId} - {Name} - {EmailAddress}";
