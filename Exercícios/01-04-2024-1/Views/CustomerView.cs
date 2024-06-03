@@ -27,6 +27,7 @@ namespace _01_04_2024_1.Views
                 Console.WriteLine("2 - Consultar cliente");
                 Console.WriteLine("3 - Listar clientes");
                 Console.WriteLine("4 - Exportar para delimitado");
+                Console.WriteLine("5 - Exportar para composição");
                 Console.WriteLine("0 - Retornar");
 
                 int menu = 0;
@@ -50,6 +51,16 @@ namespace _01_04_2024_1.Views
                         break;
                         case 4:
                             if(customerController.ExportToDelimited())
+                            {
+                                Console.WriteLine("Sucesso ao gerar arquivo");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Erro ao gerar arquivo");
+                            }
+                        break;
+                        case 5:
+                            if(customerController.ExportToComposed())
                             {
                                 Console.WriteLine("Sucesso ao gerar arquivo");
                             }
