@@ -38,10 +38,24 @@ namespace _01_04_2024_1.Controllers
             string fileContent = string.Empty;
             foreach (var c in list)
             {
+                fileContent += $"{c.PrintToExportDelimited()}\n";
+            }
+
+            string fileName = $"Delimited-Customer_{DateTimeOffset.Now.ToUnixTimeSeconds()}.txt";
+            return ExportToFile.SaveToDelimitedTxt(fileName, fileContent);
+
+        }
+        public bool ExportToComposed()
+        {
+            List<Customer> list = customerRepository.Retrieve();
+
+            string fileContent = string.Empty;
+            foreach (var c in list)
+            {
                 fileContent += $"{c.PrintToExportComposed()}\n";
             }
 
-            string fileName = $"Customer_{DateTimeOffset.Now.ToUnixTimeSeconds()}.txt";
+            string fileName = $"Composed-Customer_{DateTimeOffset.Now.ToUnixTimeSeconds()}.txt";
             return ExportToFile.SaveToDelimitedTxt(fileName, fileContent);
 
         }
