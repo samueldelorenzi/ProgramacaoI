@@ -38,7 +38,7 @@ namespace _01_04_2024_1.Controllers
             string fileContent = string.Empty;
             foreach (var c in list)
             {
-                fileContent += $"{c.PrintToExportDelimited()}\n";
+                fileContent += $"{c.PrintToExportComposed()}\n";
             }
 
             string fileName = $"Customer_{DateTimeOffset.Now.ToUnixTimeSeconds()}.txt";
