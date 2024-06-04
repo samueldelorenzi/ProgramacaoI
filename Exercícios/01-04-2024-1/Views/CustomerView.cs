@@ -28,6 +28,7 @@ namespace _01_04_2024_1.Views
                 Console.WriteLine("3 - Listar clientes");
                 Console.WriteLine("4 - Exportar para delimitado");
                 Console.WriteLine("5 - Exportar para composição");
+                Console.WriteLine("6 - Importar dados delimitados");
                 Console.WriteLine("0 - Retornar");
 
                 int menu = 0;
@@ -68,6 +69,9 @@ namespace _01_04_2024_1.Views
                             {
                                 Console.WriteLine("Erro ao gerar arquivo");
                             }
+                        break;
+                        case 6:
+                            ImportFromDelimited();
                         break;
                         default:
                             Console.WriteLine("");
@@ -226,6 +230,18 @@ namespace _01_04_2024_1.Views
             {
                 Console.WriteLine(customer.ToString());
             }
+        }
+        private void ImportFromDelimited()
+        {
+            Console.WriteLine("Informe o caminho do arquivo:");
+            string pathFile = Console.ReadLine();
+
+            Console.WriteLine("Informe o caractere limitador:");
+            string delimiter = Console.ReadLine();
+
+            string response = customerController.ImportFromDelimited(pathFile, delimiter);
+
+            Console.WriteLine(response);
         }
     }
 }

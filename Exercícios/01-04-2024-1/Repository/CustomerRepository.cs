@@ -9,9 +9,10 @@ namespace _01_04_2024_1.Repository
 {
     public class CustomerRepository
     {                
-        public void Save(Customer customer)
+        public void Save(Customer customer, bool autoGenId = true)
         {
-            customer.CustomerId = this.GetNextId();
+            if(autoGenId)
+                customer.CustomerId = this.GetNextId();
             DataSet.Customers.Add(customer);
         }
 
@@ -41,6 +42,30 @@ namespace _01_04_2024_1.Repository
                 }
             }
             return retorno;
+        }
+
+        public bool ImportFromTxt(string line, string delimiter)
+        {
+            if (string.IsNullOrWhiteSpace(line))
+                return false;
+
+            string[] data = line.Split(delimiter);
+            
+
+
+            if (data.Count() < 1)
+                return false;
+
+            Customer c = new Customer
+            {
+                CustomerId = Convert.ToInt32(data[0]),
+                Name = (data[1] == null ? string.Empty : data[1]),
+                EmailAddress = data[2] ?? string.Empty
+            };
+
+            Save(c, false);
+
+            return true;
         }
         private int GetNextId()
         {
