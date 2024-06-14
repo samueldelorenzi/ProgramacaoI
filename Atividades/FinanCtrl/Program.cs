@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FinanCtrl.Views;
+using FinanCtrl.Models;
 
 namespace FinanCtrl
 {
     enum Menu { MenuDespesa = 1, MenuLucro, MenuPerfil, MenuRelatorios, Sair = 0 }
+    
     internal class Program
     {
         static void Main()
         {
+            DespesaView despesaView = new DespesaView();
             bool rodar = true;
             do
             {
@@ -30,11 +34,11 @@ namespace FinanCtrl
                     
                     switch(opcao)
                     {
-                        case Menu.MenuLucro:
+                        case Menu.MenuDespesa:
                             Console.Clear();
                             break;
 
-                        case Menu.MenuDespesa:
+                        case Menu.MenuLucro:
                             Console.Clear();
                             break;
 
