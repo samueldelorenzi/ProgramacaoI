@@ -8,13 +8,12 @@ using FinanCtrl.Models;
 
 namespace FinanCtrl
 {
-    enum Menu { MenuDespesa = 1, MenuLucro, MenuPerfil, MenuRelatorios, Sair = 0 }
+    enum Menu { MenuDespesa = 1, MenuLucro, MenuRelatorios, Sair = 0 }
     
     internal class Program
     {
         static void Main()
         {
-            DespesaView despesaView = new DespesaView();
             bool rodar = true;
             do
             {
@@ -22,10 +21,9 @@ namespace FinanCtrl
                 Console.WriteLine("Menu principal");
                 Console.WriteLine("--------------");
 
-                Console.WriteLine("1 - Cadastrar despesa");
-                Console.WriteLine("2 - Cadastrar lucro");
-                Console.WriteLine("3 - Perfis");
-                Console.WriteLine("4 - Relatórios");
+                Console.WriteLine("1 - Menu despesa");
+                Console.WriteLine("2 - Menu lucro");
+                Console.WriteLine("3 - Relatórios");
                 Console.WriteLine("0 - Sair");
 
                 if (int.TryParse(Console.ReadLine(), out int escolha))
@@ -36,17 +34,19 @@ namespace FinanCtrl
                     {
                         case Menu.MenuDespesa:
                             Console.Clear();
+                            DespesaView despesaView = new DespesaView();
+                            Console.Clear();
                             break;
 
                         case Menu.MenuLucro:
                             Console.Clear();
-                            break;
-
-                        case Menu.MenuPerfil:
+                            LucroView lucroView = new LucroView();
                             Console.Clear();
-                            break;  
+                            break;
                         
                         case Menu.MenuRelatorios:
+                            Console.Clear();
+                            RelatorioView relatorioView = new RelatorioView();
                             Console.Clear();
                             break;
 
@@ -65,6 +65,7 @@ namespace FinanCtrl
                 {
                     Console.WriteLine("Opção inválida");
                     Thread.Sleep(1000);
+                    Console.Clear();
                 }
 
             } while (rodar);

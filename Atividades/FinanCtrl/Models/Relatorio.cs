@@ -7,27 +7,15 @@ namespace FinanCtrl.Models
 {
     public class Relatorio
     {
-        public void RelacaoDespesaLucro()
-        {
-
-        }
-        public void DespesasRecentes()
+        public void Saldo()
         {
 
         }
         public void MaiorGasto()
         {
-
+            
         }
-        public void GastoPorDia()
-        {
-
-        }
-        public void GastoPorFormaDePagamento()
-        {
-
-        }
-        public void GastoPorTipo()
+        public void GastoNoDia()
         {
 
         }

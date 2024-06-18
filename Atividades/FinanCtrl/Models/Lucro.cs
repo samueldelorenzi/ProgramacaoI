@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace FinanCtrl.Models
 {
+    [Serializable]
     public class Lucro
     {
         public float Valor { get; set; }
@@ -19,6 +20,10 @@ namespace FinanCtrl.Models
             FormaDePagamento = formadepagamento;
             Descricao = descricao;
             Data = DateTime.Now.ToString("yyyy-MM-dd");
+        }
+        public override string ToString()
+        {
+            return $"Valor: {Valor} | Categoria: {Tipo} | Forma de pagamento: {FormaDePagamento} | Descrição: {Descricao} | Data: {Data}";
         }
     }
 }
