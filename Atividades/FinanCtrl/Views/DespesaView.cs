@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinanCtrl.Controllers;
 using FinanCtrl.Data;
+using FinanCtrl.Models;
+using FinanCtrl.Utils;
 
 namespace FinanCtrl.Views
 {
-    enum MenuDespesa { Cadastrar = 1, Listar, Soma, Sair = 0 }
+    enum MenuDespesa { Cadastrar = 1, Listar, Soma, Excluir, Sair = 0 }
     
     public class DespesaView
     {
@@ -27,6 +29,7 @@ namespace FinanCtrl.Views
                 Console.WriteLine("1 - Cadastrar despesa");
                 Console.WriteLine("2 - Listar despesas");
                 Console.WriteLine("3 - Soma das despesas");
+                Console.WriteLine("4 - Excluir despesa");
                 Console.WriteLine("0 - Retornar");
 
                 if (int.TryParse(Console.ReadLine(), out int escolha))
@@ -86,6 +89,10 @@ namespace FinanCtrl.Views
         private void SomarDespesa()
         {
             
+        }
+        private void ErroDespesaVazia()
+        {
+            Console.WriteLine("Você não possui nenhuma despesa cadastrada");
         }
     }
 }
