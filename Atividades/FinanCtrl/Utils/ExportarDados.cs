@@ -18,6 +18,13 @@ namespace FinanCtrl.Utils
             {
                 Export.WriteLine(lucro.ToString());
             }
+
+            Export = File.AppendText(@"D:\Users\Samuel\Documents\Faculdade\Programação I\ProgramacaoI\Atividades\FinanCtrl\Arquivos\despesa.txt");
+
+            foreach (Despesa despesa in DataSet.despesas)
+            {
+                Export.WriteLine(despesa.ToString());
+            }
             
             Export.Close();
         }

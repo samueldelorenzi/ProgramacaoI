@@ -9,7 +9,7 @@ using FinanCtrl.Utils;
 
 namespace FinanCtrl.Views
 {
-    enum MenuLucro { Cadastrar = 1, Listar, Soma, Sair = 0 }
+    enum MenuLucro { Cadastrar = 1, Listar, Soma, Excluir, Sair = 0 }
     public class LucroView
     {
         private LucroController lucroController;
@@ -29,6 +29,7 @@ namespace FinanCtrl.Views
                 Console.WriteLine("1 - Cadastrar lucro");
                 Console.WriteLine("2 - Listar lucros");
                 Console.WriteLine("3 - Soma dos lucros");
+                Console.WriteLine("4 - Excluir lucro");
                 Console.WriteLine("0 - Retornar");
 
                 if (int.TryParse(Console.ReadLine(), out int escolha))
@@ -46,12 +47,27 @@ namespace FinanCtrl.Views
                         case MenuLucro.Listar:
                             if (DataSet.lucros.Count() != 0)
                                 ListarLucro();
+                            else
+                                ErroLucrosVazio();
                             Console.Clear();
                             break;
                         
                         case MenuLucro.Soma:
                             if (DataSet.lucros.Count() != 0)
                                 SomarLucro();
+                            else
+                                ErroLucrosVazio();
+                            Console.Clear();
+                            break;
+
+                        case MenuLucro.Excluir:
+                            if (DataSet.lucros.Count() != 0)
+                            {
+                                Console.Clear();
+                                ExcluirLucro();
+                            }
+                            else
+                                ErroLucrosVazio();
                             Console.Clear();
                             break;
 
@@ -144,7 +160,28 @@ namespace FinanCtrl.Views
         }
         private void ExcluirLucro()
         {
+            Console.WriteLine("Excluir lucro");
+            Console.WriteLine("-------------");
+            Console.Write("Informe a Id do lucro que deseja excluir: ");
 
+            int id = int.Parse(Console.ReadLine());
+
+            if (lucroController.Delete(id))
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Lucro deletado.");
+            }
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Erro ao deletar lucro.");
+            }
+            Thread.Sleep(1000); 
+        }
+        private void ErroLucrosVazio()
+        {
+            Console.WriteLine("Você não tem nenhum lucro cadastrado");
+            Thread.Sleep(1000);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 using FinanCtrl.Models;
 using FinanCtrl.Repository;
 
@@ -25,6 +26,14 @@ namespace FinanCtrl.Controllers
         public List<Lucro> Get()
         {
             return lucroRepository.Retrieve();
+        }
+
+        public bool Delete(int id)
+        {
+            if (lucroRepository.DeleteById(id))
+                return true;
+            else
+                return false;
         }
     }
 }

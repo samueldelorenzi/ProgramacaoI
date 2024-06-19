@@ -18,5 +18,19 @@ namespace FinanCtrl.Repository
         {
             return DataSet.lucros;
         }
+        public bool DeleteById(int id)
+        {
+            try
+            {
+                DataSet.lucros.RemoveAt(id);
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+
+            return true;
+            
+        }
     }
 }

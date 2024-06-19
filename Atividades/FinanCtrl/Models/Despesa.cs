@@ -20,5 +20,9 @@ namespace FinanCtrl.Models
             Descricao = descricao;
             Data = DateTime.Now.ToString("yyyy-MM-dd");
         }
+        public override string ToString()
+        {
+            return $"Valor: {Valor} | Categoria: {Tipo} | Forma de pagamento: {FormaDePagamento} | Descrição: {Descricao} | Data: {Data}";
+        }
     }
 }
