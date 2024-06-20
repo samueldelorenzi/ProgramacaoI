@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinanCtrl.Controllers;
 using FinanCtrl.Data;
+using FinanCtrl.Models;
 
 namespace FinanCtrl.Views
 {
-    enum MenuRelatorio { Saldo = 1, MaiorGasto, GastoNoDia, Sair = 0 }
+    enum MenuRelatorio { Saldo = 1, MaiorGasto, GastoNoDia, MaiorGanho, GanhoNoDia, Sair = 0 }
     public class RelatorioView
     {
         private RelatorioController relatorioController;
@@ -27,6 +28,8 @@ namespace FinanCtrl.Views
                 Console.WriteLine("1 - Relatório saldo");
                 Console.WriteLine("2 - Relatório maior gasto");
                 Console.WriteLine("3 - Relatório gasto no dia");
+                Console.WriteLine("4 - Relatório maior ganho");
+                Console.WriteLine("5 - Relatório ganho no dia");
                 Console.WriteLine("0 - Retornar");
 
                 if (int.TryParse(Console.ReadLine(), out int escolha))
@@ -50,12 +53,31 @@ namespace FinanCtrl.Views
                                 ErroFaltaDados();
                             Console.Clear();
                             break;
+
+                        case MenuRelatorio.MaiorGanho:
+                            if (DataSet.lucros.Count != 0)
+                                MaiorGanho();
+                            else
+                                ErroFaltaDados();
+                            Console.Clear();
+                            break;
                         
                         case MenuRelatorio.GastoNoDia:
                             if (DataSet.despesas.Count != 0)
                             {
                                 Console.Clear();
                                 GastoNoDia();
+                            }
+                            else
+                                ErroFaltaDados();
+                            Console.Clear();
+                            break;
+
+                        case MenuRelatorio.GanhoNoDia:
+                            if (DataSet.lucros.Count != 0)
+                            {
+                                Console.Clear();
+                                GanhoNoDia();
                             }
                             else
                                 ErroFaltaDados();
@@ -109,11 +131,61 @@ namespace FinanCtrl.Views
         }
         private void MaiorGasto()
         {
+            Despesa maiorgasto = relatorioController.MaiorGasto();
 
+            Console.WriteLine("O seu maior gasto registrado foi:");
+            Console.WriteLine($"Valor: {maiorgasto.Valor}");
+            Console.WriteLine($"No dia: {maiorgasto.Data}");
+            Console.WriteLine($"Categoria: {maiorgasto.Tipo}");
+            Console.WriteLine($"E pagou usando: {maiorgasto.FormaDePagamento}");
+
+            Console.WriteLine("");
+            Console.WriteLine("Pressione ENTER para retornar...");
+            Console.ReadLine();
         }
         private void GastoNoDia()
         {
+            Console.WriteLine("Gasto no dia");
+            Console.WriteLine("------------");
+            Console.Write("Qual dia gostaria de consultar? (AAAA-MM-DD): ");
+            string data = Console.ReadLine();
+
+            float gastosnodia = relatorioController.GastoNoDia(data);
+
+            Console.WriteLine($"No dia {data} você gastou {gastosnodia}");
             
+            Console.WriteLine("");
+            Console.WriteLine("Pressione ENTER para retornar...");
+            Console.ReadLine();
+        }
+        private void MaiorGanho()
+        {
+            Lucro maiorganho = relatorioController.MaiorGanho();
+
+            Console.WriteLine("O seu maior ganho registrado foi:");
+            Console.WriteLine($"Valor: {maiorganho.Valor}");
+            Console.WriteLine($"No dia: {maiorganho.Data}");
+            Console.WriteLine($"Categoria: {maiorganho.Tipo}");
+            Console.WriteLine($"E recebeu através de: {maiorganho.FormaDePagamento}");
+
+            Console.WriteLine("");
+            Console.WriteLine("Pressione ENTER para retornar...");
+            Console.ReadLine();
+        }
+        private void GanhoNoDia()
+        {
+            Console.WriteLine("Ganho no dia");
+            Console.WriteLine("------------");
+            Console.Write("Qual dia gostaria de consultar? (AAAA-MM-DD): ");
+            string data = Console.ReadLine();
+
+            float ganhosnodia = relatorioController.GanhoNoDia(data);
+
+            Console.WriteLine($"No dia {data} você ganhou {ganhosnodia}");
+
+            Console.WriteLine("");
+            Console.WriteLine("Pressione ENTER para retornar...");
+            Console.ReadLine();
         }
     }
 }

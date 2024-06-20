@@ -1,5 +1,0 @@
-Valor: 600 | Categoria: a | Forma de pagamento: a | Descrição: a | Data: 2024-06-19
-Valor: 900 | Categoria: A | Forma de pagamento: A | Descrição: A | Data: 2024-06-19
-Valor: 1000 | Categoria: a | Forma de pagamento: a | Descrição: a | Data: 2024-06-19
-Valor: 1000 | Categoria: a | Forma de pagamento: a | Descrição: a | Data: 2024-06-19
-Valor: 200 | Categoria: a | Forma de pagamento: a | Descrição: a | Data: 2024-06-19
