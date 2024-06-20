@@ -13,9 +13,10 @@ namespace FinanCtrl.Views
     
     public class DespesaView
     {
+        private DespesaController despesaController;
         public DespesaView()
         {
-            DespesaController despesaController = new DespesaController();
+            despesaController = new DespesaController();
             this.Init();
         }
         public void Init()
@@ -45,16 +46,29 @@ namespace FinanCtrl.Views
                             break;
 
                         case MenuDespesa.Listar:
-                            Console.Clear();
-                            if (DataSet.despesas.Count() != 0)
+                            if (DataSet.despesas.Count != 0)
                                 ListarDespesa();
+                            else
+                                ErroDespesaVazia();
                             Console.Clear();
                             break;
                         
                         case MenuDespesa.Soma:
-                            Console.Clear();
-                            if (DataSet.despesas.Count() != 0)
+                            if (DataSet.despesas.Count != 0)
                                 SomarDespesa();
+                            else
+                                ErroDespesaVazia();
+                            Console.Clear();
+                            break;
+
+                        case MenuDespesa.Excluir:
+                            if (DataSet.despesas.Count != 0)
+                            {
+                                Console.Clear();
+                                ExcluirDespesa();
+                            }
+                            else
+                                ErroDespesaVazia();
                             Console.Clear();
                             break;
 
@@ -63,36 +77,136 @@ namespace FinanCtrl.Views
                             break;
                         
                         default:
-                            Console.WriteLine("Opção inválida");
-                            Thread.Sleep(1000);
-                            Console.Clear();
+                            OpcaoInvalida();
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Opção inválida");
-                    Thread.Sleep(1000);
-                    Console.Clear();
+                    OpcaoInvalida();
                 }
 
             } while (rodar); 
         }
         private void CadastrarDespesa()
         {
+            Console.WriteLine("Cadastrar despesa");
+            Console.WriteLine("---------------");
 
+            Console.Write("Valor: ");
+            float valor = float.Parse(Console.ReadLine());
+
+            Console.Write("Categoria: ");
+            string tipo = Console.ReadLine();
+
+            Console.Write("Forma de pagamento: ");
+            string formadepagamento = Console.ReadLine();
+
+            Console.Write("Descrição: ");
+            string descricao = Console.ReadLine();
+
+            Despesa despesa = new Despesa(valor, tipo, formadepagamento, descricao);
+
+            Console.WriteLine("");
+            if (despesaController.Insert(despesa))
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Sucesso ao cadastrar despesa!");
+                Console.ResetColor();
+                ExportarDados exportarDados = new ExportarDados();
+                exportarDados.Export();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Erro ao cadastrar despesa!");
+                Console.ResetColor();
+            }
+
+            
+            Thread.Sleep(1000);
         }
         private void ListarDespesa()
         {
+            List<Despesa> despesas = despesaController.Get();
 
+            int id = 0;
+            Console.WriteLine("----------------------------");
+            foreach (Despesa despesa in despesas)
+            {
+                Console.WriteLine($" Id: {id}");
+                Console.WriteLine($" Valor: {despesa.Valor}");
+                Console.WriteLine($" Forma de pagamento: {despesa.FormaDePagamento}");
+                Console.WriteLine($" Categoria: {despesa.Tipo}");
+                Console.WriteLine($" Descrição: {despesa.Descricao}");
+                Console.WriteLine($" Data: {despesa.Data}");
+                Console.WriteLine("----------------------------");
+                id++;
+            }
+            Console.WriteLine("Aperte ENTER para retornar");
+            Console.ReadLine();
         }
         private void SomarDespesa()
         {
-            
+            List<Despesa> despesas = despesaController.Get();
+
+            float somadasdespesas = 0;
+            foreach (Despesa despesa in despesas)
+            {
+                somadasdespesas += despesa.Valor;
+            }
+
+            Console.WriteLine($"A soma das suas despesas cadastradas é igual a R${somadasdespesas}");
+
+            Console.WriteLine("");
+            Console.WriteLine("Pressione ENTER para retornar");
+            Console.ReadLine();
+        }
+        private void ExcluirDespesa()
+        {
+            Console.WriteLine("Excluir despesa");
+            Console.WriteLine("-------------");
+            Console.Write("Informe a Id da despesa que deseja excluir: ");
+
+
+            if(!int.TryParse(Console.ReadLine(), out int id))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ocorreu um erro ao deletar a despesa!");
+                Console.ResetColor();
+            }
+            else
+            {
+                if (despesaController.Delete(id))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Sucesso ao deletar a despesa!");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ocorreu um erro ao deletar a despesa!");
+                    Console.ResetColor();
+                }
+            }
+            Thread.Sleep(1000); 
         }
         private void ErroDespesaVazia()
         {
-            Console.WriteLine("Você não possui nenhuma despesa cadastrada");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Você não possui nenhuma despesa cadastrada!");
+            Console.ResetColor();
+            
+            Thread.Sleep(1000);
+        }
+        static void OpcaoInvalida()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Opção inválida! Tente novamente.");
+            Console.ResetColor();
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }

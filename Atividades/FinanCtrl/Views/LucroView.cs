@@ -45,7 +45,7 @@ namespace FinanCtrl.Views
                             break;
 
                         case MenuLucro.Listar:
-                            if (DataSet.lucros.Count() != 0)
+                            if (DataSet.lucros.Count != 0)
                                 ListarLucro();
                             else
                                 ErroLucrosVazio();
@@ -53,7 +53,7 @@ namespace FinanCtrl.Views
                             break;
                         
                         case MenuLucro.Soma:
-                            if (DataSet.lucros.Count() != 0)
+                            if (DataSet.lucros.Count != 0)
                                 SomarLucro();
                             else
                                 ErroLucrosVazio();
@@ -61,7 +61,7 @@ namespace FinanCtrl.Views
                             break;
 
                         case MenuLucro.Excluir:
-                            if (DataSet.lucros.Count() != 0)
+                            if (DataSet.lucros.Count != 0)
                             {
                                 Console.Clear();
                                 ExcluirLucro();
@@ -76,17 +76,13 @@ namespace FinanCtrl.Views
                             break;
                         
                         default:
-                            Console.WriteLine("Opção inválida");
-                            Thread.Sleep(1000);
-                            Console.Clear();
+                            OpcaoInvalida();
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Opção inválida");
-                    Thread.Sleep(1000);
-                    Console.Clear();
+                    OpcaoInvalida();
                 }
 
             } while (rodar); 
@@ -113,13 +109,19 @@ namespace FinanCtrl.Views
             Console.WriteLine("");
             if (lucroController.Insert(lucro))
             {
-                Console.WriteLine("Sucesso ao cadastrar lucro");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Sucesso ao cadastrar lucro!");
+                Console.ResetColor();
+                
                 ExportarDados exportarDados = new ExportarDados();
                 exportarDados.Export();
             }
             else
-                Console.WriteLine("Erro ao cadastrar lucro");
-            
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Erro ao cadastrar lucro!");
+                Console.ResetColor();
+            }            
             Thread.Sleep(1000);
         }
         private void ListarLucro()
@@ -168,20 +170,34 @@ namespace FinanCtrl.Views
 
             if (lucroController.Delete(id))
             {
-                Console.WriteLine("");
-                Console.WriteLine("Lucro deletado.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Lucro deletado com sucesso!");
+                Console.ResetColor();
             }
             else
             {
-                Console.WriteLine("");
-                Console.WriteLine("Erro ao deletar lucro.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Erro ao deletar lucro!");
+                Console.ResetColor();
             }
             Thread.Sleep(1000); 
         }
         private void ErroLucrosVazio()
         {
-            Console.WriteLine("Você não tem nenhum lucro cadastrado");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Você não possui nenhum lucro cadastrado!");
+            Console.ResetColor();
+            
             Thread.Sleep(1000);
+
+        }
+        static void OpcaoInvalida()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Opção inválida! Tente novamente.");
+            Console.ResetColor();
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }

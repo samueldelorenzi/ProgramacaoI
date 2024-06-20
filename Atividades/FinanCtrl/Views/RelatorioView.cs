@@ -10,9 +10,10 @@ namespace FinanCtrl.Views
     enum MenuRelatorio { Saldo = 1, MaiorGasto, GastoNoDia, Sair = 0 }
     public class RelatorioView
     {
+        private RelatorioController relatorioController;
         public RelatorioView()
         {
-            RelatorioController relatorioController = new RelatorioController();
+            relatorioController = new RelatorioController();
             this.Init();
         }
         public void Init()
@@ -35,20 +36,29 @@ namespace FinanCtrl.Views
                     switch(opcao)
                     {
                         case MenuRelatorio.Saldo:
-                            Console.Clear();
-                            if (DataSet.despesas.Count() != 0 && DataSet.lucros.Count() != 0)
+                            if (DataSet.despesas.Count != 0 && DataSet.lucros.Count != 0)
+                                Saldo();
+                            else
+                                ErroFaltaDados();
                             Console.Clear();
                             break;
 
                         case MenuRelatorio.MaiorGasto:
-                            Console.Clear();
-                            if (DataSet.despesas.Count() != 0)
+                            if (DataSet.despesas.Count != 0)
+                                MaiorGasto();
+                            else
+                                ErroFaltaDados();
                             Console.Clear();
                             break;
                         
                         case MenuRelatorio.GastoNoDia:
-                            Console.Clear();
-                            if (DataSet.despesas.Count() != 0)
+                            if (DataSet.despesas.Count != 0)
+                            {
+                                Console.Clear();
+                                GastoNoDia();
+                            }
+                            else
+                                ErroFaltaDados();
                             Console.Clear();
                             break;
 
@@ -71,6 +81,39 @@ namespace FinanCtrl.Views
                 }
 
             } while (rodar); 
+        }
+        private void ErroFaltaDados()
+        {
+            Console.WriteLine("Você não possui dados suficientes para gerar esse relatório");
+            Thread.Sleep(1000);
+        }
+        private void Saldo()
+        {
+            Console.WriteLine("Após um cálculo detalhado analisando seus lucros e despesas cadastrados...");
+            Console.Write($"Seu saldo é de ");
+
+            float saldo = relatorioController.RetornarSaldo();
+
+            if (saldo > 0)
+                Console.ForegroundColor = ConsoleColor.Green;
+            else
+                Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine($"R${saldo}");
+
+            Console.ResetColor();
+
+            Console.WriteLine("");
+            Console.WriteLine("Pressione ENTER para retornar...");
+            Console.ReadLine();
+        }
+        private void MaiorGasto()
+        {
+
+        }
+        private void GastoNoDia()
+        {
+            
         }
     }
 }

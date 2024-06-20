@@ -14,10 +14,11 @@ namespace FinanCtrl
     {
         static void Main()
         {
+            Console.Clear();
+            Console.WriteLine("Bem vindo ao gerenciador de finanças pessoais FinanCtrl");
             bool rodar = true;
             do
             {
-                Console.WriteLine("Bem vindo ao gerenciador de finanças pessoas FinanCtrl");
                 Console.WriteLine("Menu principal");
                 Console.WriteLine("--------------");
 
@@ -55,20 +56,24 @@ namespace FinanCtrl
                             break;
                         
                         default:
-                            Console.WriteLine("Opção inválida");
-                            Thread.Sleep(1000);
-                            Console.Clear();
+                            OpcaoInvalida();
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Opção inválida");
-                    Thread.Sleep(1000);
-                    Console.Clear();
+                    OpcaoInvalida();
                 }
 
             } while (rodar);
+        }
+        static void OpcaoInvalida()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Opção inválida! Tente novamente.");
+            Console.ResetColor();
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }

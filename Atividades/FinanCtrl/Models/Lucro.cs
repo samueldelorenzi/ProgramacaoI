@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace FinanCtrl.Models
 {
-    [Serializable]
     public class Lucro
     {
         public float Valor { get; set; }
