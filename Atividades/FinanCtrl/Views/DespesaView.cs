@@ -9,7 +9,7 @@ using FinanCtrl.Utils;
 
 namespace FinanCtrl.Views
 {
-    enum MenuDespesa { Cadastrar = 1, Listar, Soma, Excluir, Sair = 0 }
+    enum MenuDespesa { Cadastrar = 1, Listar, Soma, Excluir, Editar, Sair = 0 }
     
     public class DespesaView
     {
@@ -31,6 +31,7 @@ namespace FinanCtrl.Views
                 Console.WriteLine("2 - Listar despesas");
                 Console.WriteLine("3 - Soma das despesas");
                 Console.WriteLine("4 - Excluir despesa");
+                Console.WriteLine("5 - Editar despesa");
                 Console.WriteLine("0 - Retornar");
 
                 if (int.TryParse(Console.ReadLine(), out int escolha))
@@ -72,6 +73,17 @@ namespace FinanCtrl.Views
                             Console.Clear();
                             break;
 
+                        case MenuDespesa.Editar:
+                            if (DataSet.despesas.Count != 0)
+                            {
+                                Console.Clear();
+                                EditarDespesa();
+                            }
+                            else
+                                ErroDespesaVazia();
+                            Console.Clear();
+                            break;
+
                         case MenuDespesa.Sair:
                             rodar = false;
                             break;
@@ -94,7 +106,15 @@ namespace FinanCtrl.Views
             Console.WriteLine("---------------");
 
             Console.Write("Valor: ");
-            float valor = float.Parse(Console.ReadLine());
+
+            if(!float.TryParse(Console.ReadLine(), out float valor))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Insira valores válidos!");
+                Console.ResetColor();
+                Thread.Sleep(1000);
+                return;
+            }
 
             Console.Write("Categoria: ");
             string tipo = Console.ReadLine();
@@ -113,8 +133,8 @@ namespace FinanCtrl.Views
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Sucesso ao cadastrar despesa!");
                 Console.ResetColor();
-                ExportarDados exportarDados = new ExportarDados();
-                exportarDados.Export();
+
+                ExportarDados.ExportDespesa();
             }
             else
             {
@@ -207,6 +227,47 @@ namespace FinanCtrl.Views
             Console.ResetColor();
             Thread.Sleep(1000);
             Console.Clear();
+        }
+        private void EditarDespesa()
+        {
+            Console.WriteLine("Editar despesa");
+            Console.WriteLine("------------");
+            Console.Write("Informe a Id da despesa que deseja editar: ");
+
+            if(!int.TryParse(Console.ReadLine(), out int id))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Insira valores válidos!");
+                Console.ResetColor();
+                Thread.Sleep(1000);
+                return;
+            }
+
+            if (DataSet.despesas.ElementAtOrDefault(id) != null)
+            {
+                Console.Write("Novo Valor: ");
+                float valor = float.Parse(Console.ReadLine());
+
+                Console.Write("Nova Categoria: ");
+                string tipo = Console.ReadLine();
+
+                Console.Write("Nova Forma de pagamento: ");
+                string formadepagamento = Console.ReadLine();
+
+                Console.Write("Nova Descrição: ");
+                string descricao = Console.ReadLine();
+
+                Despesa despesa = new Despesa(valor, tipo, formadepagamento, descricao);
+
+                if (despesaController.Update(despesa, id))
+                    Console.WriteLine("Sucesso ao editar despesa");
+                else
+                    Console.WriteLine("Erro ao editar despesa");
+            }
+            else
+                Console.WriteLine("A Id informada não existe");
+
+            Thread.Sleep(1000);
         }
     }
 }

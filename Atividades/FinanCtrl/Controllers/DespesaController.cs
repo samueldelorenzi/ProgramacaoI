@@ -33,5 +33,12 @@ namespace FinanCtrl.Controllers
             else
                 return false;
         }
+        public bool Update(Despesa despesa, int id)
+        {
+            if (despesaRepository.UpdateDespesa(despesa, id))
+                return true;
+            else
+                return false;
+        }
     }
 }

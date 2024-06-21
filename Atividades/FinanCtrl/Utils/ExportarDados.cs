@@ -10,9 +10,9 @@ namespace FinanCtrl.Utils
 {
     public class ExportarDados
     {
-        public void Export()
+        public static void ExportLucro()
         {
-            StreamWriter Export = File.AppendText(@"D:\Users\Samuel\Documents\Faculdade\Programação I\ProgramacaoI\Atividades\FinanCtrl\Arquivos\lucrohistory.txt");
+            StreamWriter Export = File.AppendText(@"Arquivos\lucrohistory.txt");
 
             foreach (Lucro lucro in DataSet.lucros)
             {
@@ -20,8 +20,10 @@ namespace FinanCtrl.Utils
             }
 
             Export.Close();
-
-            Export = File.AppendText(@"D:\Users\Samuel\Documents\Faculdade\Programação I\ProgramacaoI\Atividades\FinanCtrl\Arquivos\despesahistory.txt");
+        }
+        public static void ExportDespesa()
+        {
+            StreamWriter Export = File.AppendText(@"Arquivos\despesahistory.txt");
 
             foreach (Despesa despesa in DataSet.despesas)
             {

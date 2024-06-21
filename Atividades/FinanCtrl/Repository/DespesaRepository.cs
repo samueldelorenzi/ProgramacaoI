@@ -31,5 +31,18 @@ namespace FinanCtrl.Repository
 
             return true;
         }
+        public bool UpdateDespesa(Despesa despesa, int id)
+        {
+            try
+            {
+                DataSet.despesas[id] = despesa;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

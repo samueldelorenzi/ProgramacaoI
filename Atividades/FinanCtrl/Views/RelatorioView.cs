@@ -106,7 +106,9 @@ namespace FinanCtrl.Views
         }
         private void ErroFaltaDados()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Você não possui dados suficientes para gerar esse relatório");
+            Console.ResetColor();
             Thread.Sleep(1000);
         }
         private void Saldo()
@@ -134,7 +136,7 @@ namespace FinanCtrl.Views
             Despesa maiorgasto = relatorioController.MaiorGasto();
 
             Console.WriteLine("O seu maior gasto registrado foi:");
-            Console.WriteLine($"Valor: {maiorgasto.Valor}");
+            Console.WriteLine($"Valor: R${maiorgasto.Valor}");
             Console.WriteLine($"No dia: {maiorgasto.Data}");
             Console.WriteLine($"Categoria: {maiorgasto.Tipo}");
             Console.WriteLine($"E pagou usando: {maiorgasto.FormaDePagamento}");
@@ -152,7 +154,14 @@ namespace FinanCtrl.Views
 
             float gastosnodia = relatorioController.GastoNoDia(data);
 
-            Console.WriteLine($"No dia {data} você gastou {gastosnodia}");
+            if(gastosnodia == 0)
+            {
+                Console.WriteLine("Dados inexistentes");
+                Thread.Sleep(1000);
+                return;
+            }
+
+            Console.WriteLine($"No dia {data} você gastou R${gastosnodia}");
             
             Console.WriteLine("");
             Console.WriteLine("Pressione ENTER para retornar...");
@@ -163,7 +172,7 @@ namespace FinanCtrl.Views
             Lucro maiorganho = relatorioController.MaiorGanho();
 
             Console.WriteLine("O seu maior ganho registrado foi:");
-            Console.WriteLine($"Valor: {maiorganho.Valor}");
+            Console.WriteLine($"Valor: R${maiorganho.Valor}");
             Console.WriteLine($"No dia: {maiorganho.Data}");
             Console.WriteLine($"Categoria: {maiorganho.Tipo}");
             Console.WriteLine($"E recebeu através de: {maiorganho.FormaDePagamento}");
@@ -181,7 +190,14 @@ namespace FinanCtrl.Views
 
             float ganhosnodia = relatorioController.GanhoNoDia(data);
 
-            Console.WriteLine($"No dia {data} você ganhou {ganhosnodia}");
+            if(ganhosnodia == 0)
+            {
+                Console.WriteLine("Dados inexistentes");
+                Thread.Sleep(1000);
+                return;
+            }
+
+            Console.WriteLine($"No dia {data} você ganhou R${ganhosnodia}");
 
             Console.WriteLine("");
             Console.WriteLine("Pressione ENTER para retornar...");

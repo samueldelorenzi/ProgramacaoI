@@ -32,5 +32,18 @@ namespace FinanCtrl.Repository
             return true;
             
         }
+        public bool UpdateLucro(Lucro lucro, int id)
+        {
+            try
+            {
+                DataSet.lucros[id] = lucro;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

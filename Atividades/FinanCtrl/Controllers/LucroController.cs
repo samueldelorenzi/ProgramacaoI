@@ -35,5 +35,12 @@ namespace FinanCtrl.Controllers
             else
                 return false;
         }
+        public bool Update(Lucro lucro, int id)
+        {
+            if (lucroRepository.UpdateLucro(lucro, id))
+                return true;
+            else
+                return false;
+        }
     }
 }
